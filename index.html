@@ -10,6 +10,7 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <!-- Bootstrap -->
 
     <!-- Google Fonts -->
@@ -20,32 +21,53 @@
     <!-- Google Fonts -->
 
     <style>
-        *{
+        * {
             color: #363636;
-            
+
         }
-        body{
+
+        body {
             background-color: #eff1eb;
             font-family: 'Nunito', sans-serif;
         }
+
         h1 {
             font-family: 'McLaren', cursive;
             color: #363636;
-            font-size:xx-large;
+            font-size: xx-large;
 
         }
-        span{
+
+        span {
             color: #898a81 !important;
 
 
         }
-        h2{
+
+        h2 {
             /* font-weight: ; */
             color: #898a81 !important;
-            font-weight:400;
+            font-weight: 400;
         }
-        .cardTask{
+
+        .cardTask {
             background-color: #fafafa;
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: space-between;
+            gap: 4px;
+            flex-direction: row;
+            padding: 6px 6px;
+        }
+
+        i {
+            color: #fae09a !important;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+            box-shadow: none;
         }
     </style>
 
@@ -53,52 +75,69 @@
 </head>
 
 <body class="container">
-    <div class="d-flex flex-column gap-0 w-100 align-items-center">
-        <h1 class="fw-bold fs-1">Cardable</h1>
+    <div class="d-flex flex-column gap-0  align-items-center">
+        <h1 class="fw-bold fs-1 mt-3">Cardable</h1>
         <span class="small">You Kanban Board</span>
     </div>
-    <div class="d-flex flex-row gap-2 w-100 mt-4">
-        <div class="col d-flex flex-row align-items-center gap-4">
-          <!-- not specified -->
-          <h2 class="fs-5 m-0 p-0">Not Specified</h2>
-          <button class="btn border-0 bg-info"> <span class="text-white">+</span></button>
-          <div>
-            <!-- List Not Specified -->
-            <div>
-
+    <main>
+        <div class="d-flex flex-row gap-4 mt-4">
+            <div class="col">
+                <div id="column-Not-Specified" class="d-flex flex-column gap-3">
+                    <!-- label column -->
+                    <div class="d-flex flex-row align-items-center gap-4">
+                        <h2 class="fs-5 m-0 p-0">Not Specified</h2>
+                        <button class="btn border-0 bg-info" id="adicionarTarefa">
+                            <span class="text-white">+</span>
+                        </button>
+                    </div>
+                    <!-- tasks -->
+                    
+                    
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col d-flex flex-row align-items-center gap-4">
-          <!-- To-Do -->
-          <h2 class="fs-5 m-0 p-0">To-Do</h2>
-          <button class="btn border-0 bg-info"> <span class="text-white">+</span></button>
-          <div>
-            <!-- list To-Do -->
-          </div>
-        </div>
-        <div class="col d-flex flex-row align-items-center gap-4">
-          <!-- In Progress -->
-          <h2 class="fs-5 m-0 p-0">In Progress</h2>
-          <button class="btn border-0 bg-info"> <span class="text-white">+</span></button>
-          <div>
-            <!-- list In Progress -->
-          </div>
-        </div>
-        <div class="col d-flex flex-row align-items-center gap-4">
-          <!-- Completed -->
-          <h2 class="fs-5 m-0 p-0">Completed</h2>
-          <button class="btn border-0 bg-info"> <span class="text-white">+</span></button>
-          <div>
-            <!-- list Completed -->
-          </div>
+            <div class="col">
+                <div id="column-To-Do" class="d-flex flex-column gap-3">
+                    <!-- label column -->
+                    <div class="d-flex flex-row align-items-center gap-4">
+                        <h2 class="fs-5 m-0 p-0">To-Do</h2>
+                        <button class="btn border-0 bg-info" id="adicionarTarefa"> <span class="text-white">+</span></button>
+                    </div>
+                    <!-- tasks -->
+                    
+
+                </div>
+            </div>
+            <div class="col">
+                <div id="column-In-Progress" class="d-flex flex-column gap-3">
+                    <!-- label column -->
+                    <div class="d-flex flex-row align-items-center gap-4">
+                        <h2 class="fs-5 m-0 p-0">In Progress</h2>
+                        <button class="btn border-0 bg-info" id="adicionarTarefa"> <span class="text-white">+</span></button>
+                    </div>
+                    <!-- tasks -->
+                    
+
+                </div>
+            </div>
+            <div class="col">
+                <div id="column-Completed" class="d-flex flex-column gap-3">
+                    <!-- label column -->
+                    <div class="d-flex flex-row align-items-center gap-4">
+                        <h2 class="fs-5 m-0 p-0">Completed</h2>
+                        <button class="btn border-0 bg-info" id="adicionarTarefa"> <span class="text-white">+</span></button>
+                    </div>
+                    <!-- tasks -->
+                    
+                </div>
+            </div>
 
         </div>
-      </div>
-      
+    </main>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- Bootstrap -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=McLaren&family=Nunito:wght@200;400;500&display=swap"
+        rel="stylesheet">
+    <!-- Google Fonts -->
+
+    <style>
+        *{
+            color: #363636;
+            
+        }
+        body{
+            background-color: #eff1eb;
+            font-family: 'Nunito', sans-serif;
+        }
+        h1 {
+            font-family: 'McLaren', cursive;
+            color: #363636;
+            font-size:xx-large;
+
+        }
+        span{
+            color: #898a81 !important;
+
+
+        }
+        h2{
+            /* font-weight: ; */
+            color: #898a81 !important;
+            font-weight:400;
+        }
+        .cardTask{
+            background-color: #fafafa;
+        }
+    </style>
+
+
+</head>
+
+<body class="container">
+    <div class="d-flex flex-column gap-0 w-100 align-items-center">
+        <h1 class="fw-bold fs-1">Cardable</h1>
+        <span class="small">You Kanban Board</span>
+    </div>
+    <div class="d-flex flex-row gap-2 w-100 mt-4">
+        <div class="col d-flex flex-row align-items-center gap-4">
+          <!-- not specified -->
+          <h2 class="fs-5 m-0 p-0">Not Specified</h2>
+          <button class="btn border-0 bg-info"> <span class="text-white">+</span></button>
+          <div>
+            <!-- List Not Specified -->
+            <div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col d-flex flex-row align-items-center gap-4">
+          <!-- To-Do -->
+          <h2 class="fs-5 m-0 p-0">To-Do</h2>
+          <button class="btn border-0 bg-info"> <span class="text-white">+</span></button>
+          <div>
+            <!-- list To-Do -->
+          </div>
+        </div>
+        <div class="col d-flex flex-row align-items-center gap-4">
+          <!-- In Progress -->
+          <h2 class="fs-5 m-0 p-0">In Progress</h2>
+          <button class="btn border-0 bg-info"> <span class="text-white">+</span></button>
+          <div>
+            <!-- list In Progress -->
+          </div>
+        </div>
+        <div class="col d-flex flex-row align-items-center gap-4">
+          <!-- Completed -->
+          <h2 class="fs-5 m-0 p-0">Completed</h2>
+          <button class="btn border-0 bg-info"> <span class="text-white">+</span></button>
+          <div>
+            <!-- list Completed -->
+          </div>
+
+        </div>
+      </div>
+      
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

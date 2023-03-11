@@ -7,12 +7,3 @@ function excluirDoLocalStorage(texto) {
         saveTasksToLocalStorage(tasks)
     }
 }
-
-function saveTasksToLocalStorage(tasks) {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-function loadTasksFromLocalStorage() {
-    const tasksJSON = localStorage.getItem('tasks');
-    return tasksJSON ? JSON.parse(tasksJSON) : [];
-}

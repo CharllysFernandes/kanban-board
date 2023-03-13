@@ -32,7 +32,6 @@ function addTask(column) {
     taskList.push(newTask)
     saveTasksToLocalStorage(taskList);
     loadTaskInColumn(column, uniqueID)
-    console.log(column)
 
 }
 

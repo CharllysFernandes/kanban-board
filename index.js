@@ -65,7 +65,7 @@ function createTaskCard(params) {
     
     newDiv.innerHTML = `
     <span class="me-2">${params.task}</span>
-    <button onclick="deleteTask(${params.id})" class="btn border-0"><i class="bi bi-x-circle-fill"></i></button>
+    <button onclick="deleteTaskById(${params.id})" class="btn border-0"><i class="bi bi-x-circle-fill"></i></button>
     `
     
     return newDiv
@@ -95,10 +95,25 @@ function init() {
 }
 
 function deleteTaskById(id) {
+    const matchingTask = taskList.findIndex(task => task.id === id);
+    // if (!matchingTask) {
+    //     console.error(`Tarefa com ID ${id} não encontrada na lista`);
+    //     return;
+    // }
+
+    const column = matchingTask;
+    console.log(matchingTask)
     const index = taskList.findIndex(task => task.id === id);
-    if (index !== -1) tasks.splice(index, 1);
+    if (index !== -1) taskList.splice(index, 1);
+
     saveTasksToLocalStorage(taskList);
+    const columnDiv = document.getElementById(column);
+    const cardToRemove = document.getElementById(`cardTask-${id}`);
+    if (cardToRemove) {
+        columnDiv.removeChild(cardToRemove);
+    }
 }
+
 
 window.addEventListener('storage', function (e) {
     if (e.key === 'taskList') {

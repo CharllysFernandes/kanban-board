@@ -1,5 +1,5 @@
 
-const taskList = loadTasksFromLocalStorage()
+let taskList = loadTasksFromLocalStorage()
 const taskDefault = (id, task, statusTask) => ({id, task, statusTask});
 
 function loadTasksFromLocalStorage() {
@@ -94,24 +94,8 @@ function init() {
     }
 }
 
-function deleteTaskById(id) {
-    const matchingTask = taskList.findIndex(task => task.id === id);
-    // if (!matchingTask) {
-    //     console.error(`Tarefa com ID ${id} não encontrada na lista`);
-    //     return;
-    // }
-
-    const column = matchingTask;
-    console.log(matchingTask)
-    const index = taskList.findIndex(task => task.id === id);
-    if (index !== -1) taskList.splice(index, 1);
-
-    saveTasksToLocalStorage(taskList);
-    const columnDiv = document.getElementById(column);
-    const cardToRemove = document.getElementById(`cardTask-${id}`);
-    if (cardToRemove) {
-        columnDiv.removeChild(cardToRemove);
-    }
+function deleteTaskById(taskID) {
+    //TODO
 }
 
 

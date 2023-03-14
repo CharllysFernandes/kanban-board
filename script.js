@@ -22,24 +22,24 @@ init();
  *
  */
 
-function saveTasksToLocalStorage(tasks) {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
+// function saveTasksToLocalStorage(tasks) {
+//     localStorage.setItem('tasks', JSON.stringify(tasks));
+// }
 
-function loadTasksFromLocalStorage() {
-    const tasksJSON = localStorage.getItem('tasks');
-    return tasksJSON ? JSON.parse(tasksJSON) : [];
-}
+// function loadTasksFromLocalStorage() {
+//     const tasksJSON = localStorage.getItem('tasks');
+//     return tasksJSON ? JSON.parse(tasksJSON) : [];
+// }
 
-function generateUniqueId() {
-    return (
-        Math.random().toString(16).substr(2, 8)
-    );
-}
+// function generateUniqueId() {
+//     return (
+//         Math.random().toString(16).substr(2, 8)
+//     );
+// }
 
-function filterColumn(column) {
-    return column.slice(4); // remove o "btn-" do id da coluna encontrado.
-}
+// function filterColumn(column) {
+//     return column.slice(4); // remove o "btn-" do id da coluna encontrado.
+// }
 
 function addTask(columnName) {
     let uniqueID = generateUniqueId(); // Gera um ID único para a nova tarefa
@@ -64,8 +64,10 @@ function loadTaskInColumn(column, idTask) {
     try {
         const newDiv = createTaskCard(matchingTask);
         columnDiv.appendChild(newDiv);
+
     } catch (error) {
         console.error(`Erro ao criar cartão de tarefa: ${error.message}`);
+        
     }
     
 }

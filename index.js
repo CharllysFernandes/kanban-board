@@ -1,93 +1,111 @@
 
-let taskList = loadTasksFromLocalStorage(); // Carrega a lista de tarefas do armazenamento local
-const taskDefault = (id, task, statusTask) => ({id, task, statusTask,})  
-
-function init() {
-    // Criando novas Array apartir do taskList
-    let notSpecifiedList = taskList.filter(task => task.statusTask === 'not-Specified')
-    let toDoList = taskList.filter(task => task.statusTask === 'to-Do')
-    let inProgressList = taskList.filter(task => task.statusTask === 'in-Progress')
-    let completedList = taskList.filter(task => task.statusTask === 'completed')
-
-    notSpecifiedList.forEach(task => loadTaskInColumn('not-Specified', task.id));
-    toDoList.forEach(task => loadTaskInColumn('to-Do', task.id));
-    inProgressList.forEach(task => loadTaskInColumn('in-Progress', task.id));
-    completedList.forEach(task => loadTaskInColumn('completed', task.id));
-
-}
-
-init();
-
-/**
- *
- */
-
-function saveTasksToLocalStorage(tasks) {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
+const taskList = loadTasksFromLocalStorage()
+const taskDefault = (id, task, statusTask) => ({id, task, statusTask});
 
 function loadTasksFromLocalStorage() {
-    const tasksJSON = localStorage.getItem('tasks');
+    const tasksJSON = localStorage.getItem('tasks')
     return tasksJSON ? JSON.parse(tasksJSON) : [];
+}
+
+function saveTasksToLocalStorage(taskList) {
+    localStorage.setItem('tasks', JSON.stringify(taskList))
 }
 
 function generateUniqueId() {
     return (
-        Math.random().toString(16).substr(2, 8)
-    );
+        Math.random().toString(6).substring(2, 8)
+    )
 }
 
-function filterColumn(column) {
-    return column.slice(4); // remove o "btn-" do id da coluna encontrado.
+function deleteTask(params) {
+    console.log(params)
 }
 
-function addTask(columnName) {
-    let uniqueID = generateUniqueId(); // Gera um ID único para a nova tarefa
-    let newColumn = filterColumn(columnName); // Filtra a coluna especificada
-    if (newColumn) { // Verifica se a coluna existe
-        let newTask = taskDefault(uniqueID, "new task", newColumn);
-        taskList.push(newTask); // Adiciona a nova tarefa à lista de tarefas
-        loadTaskInColumn(newColumn, uniqueID); // Carrega a nova tarefa na coluna correspondente
-        saveTasksToLocalStorage(taskList); // Salva a lista de tarefas atualizada no armazenamento local
+function filterColumn(params) {
+    return params.slice(4);
+}
+
+function addNewTask(params) {
+    let uniqueID = generateUniqueId();
+    let newColumn = filterColumn(params);
+    
+    if (newColumn) {
+        let newTask = taskDefault(uniqueID, "New Task", newColumn)
+        taskList.push(newTask)
+        
+        loadTaskInColumn(newColumn, uniqueID)
+        saveTasksToLocalStorage(taskList)
     }
 }
+
 function loadTaskInColumn(column, idTask) {
     
     const columnDiv = document.getElementById(column);
-    const matchingTask = taskList.find(task => task.id === idTask);
+    const matchingTask = taskList.find(task => task.id === idTask)
     
     if (!matchingTask) {
-        console.error(`Tarefa com ID ${idTask} não encontrada na lista.`);
+        console.error(`Tarefa com ID ${idTask} não encontrada na lista`)
         return;
     }
-    
+
     try {
-        const newDiv = createTaskCard(matchingTask);
-        columnDiv.appendChild(newDiv);
+        const newDiv = createTaskCard(matchingTask)
+        columnDiv.appendChild(newDiv)
+        
     } catch (error) {
-        console.error(`Erro ao criar cartão de tarefa: ${error.message}`);
+        console.error(`Erro ao criar cartão de tarefa: `)
+        
     }
-    
 }
 
-
-
-
-function createTaskCard(task) {
+function createTaskCard(params) {
     const newDiv = document.createElement('div');
-    newDiv.classList.add('card-task', 'rounded-2', 'shadow-sm');
-    newDiv.setAttribute('id', 'cardTask');
+    newDiv.classList.add('card-task', 'rounded-2', 'shadow-sm')
+    newDiv.setAttribute('id', 'cardTask')
     
     newDiv.innerHTML = `
-    <span class="me-2">${task.task}</span>
-    <button onclick="deleteTask(${task.id})" class="btn border-0"><i class="bi bi-x-circle-fill"></i></button>
-    `;
+    <span class="me-2">${params.task}</span>
+    <button onclick="deleteTask(${params.id})" class="btn border-0"><i class="bi bi-x-circle-fill"></i></button>
+    `
     
-    return newDiv;
+    return newDiv
 }
 
-window.addEventListener('storage', function(e) {
-    if (e.key === 'taskList') {
-        taskList = loadTasksFromLocalStorage();
+function init() {
+    // Criando objeto para agrupar as tarefas de acordo com o status
+    let taskLists = {
+        'not-Specified': [],
+        'to-Do': [],
+        'in-Progress': [],
+        'completed': []
+    };
+
+    // Agrupando as tarefas de acordo com o status
+    taskList.forEach(task => {
+        taskLists[task.statusTask].push(task);
+    });
+
+    // Adicionando as tarefas à coluna correspondente
+    for (const status in taskLists) {
+        const tasks = taskLists[status];
+        tasks.forEach(task => {
+            loadTaskInColumn(status, task.id);
+        });
     }
+}
+
+function deleteTaskById(id) {
+    const index = taskList.findIndex(task => task.id === id);
+    if (index !== -1) tasks.splice(index, 1);
+    saveTasksToLocalStorage(taskList);
+}
+
+window.addEventListener('storage', function (e) {
+    if (e.key === 'taskList') {
+        taskList = loadTasksFromLocalStorage()
+    }
+})
+
+document.addEventListener('DOMContentLoaded', function() {
+    init();
 });

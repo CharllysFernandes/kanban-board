@@ -93,10 +93,36 @@ function init() {
         });
     }
 }
-
 function deleteTaskById(taskID) {
-    //TODO
+    const taskIdString = `${taskID}`;
+    const taskIndex = taskList.findIndex(task => task.id === taskIdString);
+    
+    if (taskIndex === -1) {
+        console.error(`Tarefa com ID ${taskID} não encontrada na lista`);
+        return;
+    }
+
+    taskList.splice(taskIndex, 1);
+    saveTasksToLocalStorage(taskList);
+
+    const taskColumn = taskDefault.statusColumn;
+    const taskCard = document.getElementById(`cardTask_${taskIdString}`);
+
+    if (taskCard) {
+        taskCard.remove();
+    }
+
+    console.log(`Tarefa com ID ${taskID} removida da lista`);
+
+    if (taskColumn) {
+        const columnDiv = document.getElementById(taskColumn);
+        if (columnDiv) {
+            columnDiv.removeChild(taskCard);
+            console.log(`Tarefa removida da coluna ${taskColumn}`);
+        }
+    }
 }
+
 
 
 window.addEventListener('storage', function (e) {

@@ -174,8 +174,8 @@ columns.forEach(column => {
             taskList.forEach(task => {
                 const taskCard = document.getElementById(task.id);
                 const columnId = taskCard.parentNode.id;
-                const newStatus = filterColumn(columnId);
-                task.statusTask = newStatus;
+                console.log(columnId)
+                task.taskStates = columnId;
             });
             saveTasksToLocalStorage(taskList);
         }

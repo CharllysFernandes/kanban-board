@@ -1,5 +1,5 @@
 
-const taskDefault = (id, task, statusTask) => ({ id, task, statusTask });
+const taskDefault = (id, task, taskStates) => ({ id, task, taskStates });
 let taskList = loadTasksFromLocalStorage()
 
 function loadTasksFromLocalStorage() {
@@ -59,17 +59,12 @@ function loadTaskInColumn(column, idTask) {
         console.error(`Erro ao criar cartão de tarefa: `)
 
     }
-    
-}
 
-// function addEditTask() {
-//     const taskSpan = newDiv.querySelector('.card-task');
-//     taskSpan.addEventListener('click', editTask);
-// }
+}
 
 function createTaskCard({ id, task }) {
     const newDiv = document.createElement('div');
-    newDiv.classList.add('card-task', 'rounded-2', 'shadow-sm');
+    newDiv.classList.add('card-task', 'rounded-2', 'shadow-sm', 'px-2');
     newDiv.setAttribute('data-task-id', id);
     newDiv.setAttribute('id', id);
 
@@ -106,7 +101,7 @@ function init() {
 
     // Agrupando as tarefas de acordo com o status
     taskList.forEach(task => {
-        taskLists[task.statusTask].push(task);
+        taskLists[task.taskStates].push(task);
     });
 
     // Adicionando as tarefas à coluna correspondente
@@ -171,18 +166,18 @@ const columns = document.querySelectorAll('.task-column');
 
 // Para cada coluna, crie uma instância do Sortable
 columns.forEach(column => {
-  new Sortable(column, {
-    group: 'tasks', // Agrupa as colunas da lista de tarefas
-    animation: 150, // Define a velocidade da animação de arrastar e soltar
-    onEnd: () => { // Quando a tarefa for solta em outra coluna
-      // Percorra todas as tarefas e atualize o status
-      taskList.forEach(task => {
-        const taskCard = document.getElementById(task.id);
-        const columnId = taskCard.parentNode.id;
-        const newStatus = filterColumn(columnId);
-        task.statusTask = newStatus;
-      });
-      saveTasksToLocalStorage(taskList);
-    }
-  });
+    new Sortable(column, {
+        group: 'tasks', // Agrupa as colunas da lista de tarefas
+        animation: 150, // Define a velocidade da animação de arrastar e soltar
+        onEnd: () => { // Quando a tarefa for solta em outra coluna
+            // Percorra todas as tarefas e atualize o status
+            taskList.forEach(task => {
+                const taskCard = document.getElementById(task.id);
+                const columnId = taskCard.parentNode.id;
+                const newStatus = filterColumn(columnId);
+                task.statusTask = newStatus;
+            });
+            saveTasksToLocalStorage(taskList);
+        }
+    });
 });

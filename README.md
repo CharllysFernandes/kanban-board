@@ -17,6 +17,8 @@ Para usar o aplicativo, simplesmente abra o arquivo index.html em um navegador d
 - HTML
 - CSS
 - JavaScript
+- Bootstrap
+- Sortable.js
 
 # Créditos
 
@@ -26,5 +28,5 @@ Este aplicativo foi criado por Charllys Fernandes como parte de um projeto pesso
 
 
 
-Licença
+# Licença
 Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE.md para detalhes.

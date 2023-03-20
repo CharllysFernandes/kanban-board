@@ -24,7 +24,7 @@ function addNewTask(column, taskName = "New Task") {
     const newColumn = filterColumn(column);
 
     if (!newColumn) {
-        console.error(`Coluna inválida: ${column}`);
+        console.error(`Invalid column: ${column}`);
         return null;
     }
 
@@ -45,7 +45,7 @@ function loadTaskInColumn(column, idTask) {
     const matchingTask = taskList.find(task => task.id === idTask)
 
     if (!matchingTask) {
-        console.error(`Tarefa com ID ${idTask} não encontrada na lista`)
+        console.error(`Task with ID ${idTask} not found in list`)
         return;
     }
 
@@ -56,7 +56,7 @@ function loadTaskInColumn(column, idTask) {
         addEditTask()
 
     } catch (error) {
-        console.error(`Erro ao criar cartão de tarefa: `)
+        console.error(`Error creating task card: ${idTask}`)
 
     }
 
@@ -91,7 +91,6 @@ function addNewButtons() {
 }
 
 function init() {
-    // Criando objeto para agrupar as tarefas de acordo com o status
     let taskLists = {
         'not-Specified': [],
         'to-Do': [],
@@ -99,12 +98,10 @@ function init() {
         'completed': []
     };
 
-    // Agrupando as tarefas de acordo com o status
     taskList.forEach(task => {
         taskLists[task.taskStates].push(task);
     });
 
-    // Adicionando as tarefas à coluna correspondente
     for (const status in taskLists) {
         const tasks = taskLists[status];
         tasks.forEach(task => {
@@ -152,7 +149,7 @@ function editTask(event) {
     const taskIndex = taskList.findIndex(task => task.id === taskId);
 
     if (taskIndex !== -1) {
-        const newTaskName = prompt('Digite o novo nome da tarefa:', taskList[taskIndex].task);
+        const newTaskName = prompt('Enter the new task name: ', taskList[taskIndex].task);
         if (newTaskName) {
             taskList[taskIndex].task = newTaskName;
             taskSpan.textContent = newTaskName;
@@ -161,16 +158,13 @@ function editTask(event) {
     }
 }
 
-// Selecione as colunas da sua lista de tarefas
 const columns = document.querySelectorAll('.task-column');
 
-// Para cada coluna, crie uma instância do Sortable
 columns.forEach(column => {
     new Sortable(column, {
         group: 'tasks', // Agrupa as colunas da lista de tarefas
         animation: 150, // Define a velocidade da animação de arrastar e soltar
         onEnd: () => { // Quando a tarefa for solta em outra coluna
-            // Percorra todas as tarefas e atualize o status
             taskList.forEach(task => {
                 const taskCard = document.getElementById(task.id);
                 const columnId = taskCard.parentNode.id;
